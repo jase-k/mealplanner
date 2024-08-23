@@ -3,35 +3,38 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-<!-- Changes to create Roles table -->
-<changeSet id="1" author="your_username">
-    <createTable tableName="permissions">
-        <column name="id" type="BIGINT">
-            <constraints primaryKey="true" nullable="false" />
-        </column>
-        <column name="name" type="VARCHAR(50)">
-            <constraints unique="true" nullable="false"/>
-        </column>
-    </createTable>
-    <addAutoIncrement tableName="permissions" columnName="id" startValue="1" incrementBy="1"/>
-    <insert tableName="permissions">
-        <column name="permission_name" value="admin"/>
-    </insert>
-    <insert tableName="permissions">
-        <column name="permission_name" value="limited"/>
-    </insert>
-    <insert tableName="permissions">
-        <column name="permission_name" value="public"/>
-    </insert>
-</changeSet>
-<!-- Changes to add foreign key on Users table -->
-<changeSet id="2" author="your_username">
-    
-    <addForeignKeyConstraint baseTableName="users"
-                             baseColumnNames="permission_id"
-                             referencedTableName="permissions"
-                             referencedColumnNames="permission_id"
-                             constraintName="fk_users_permissions"/>
-</changeSet>
-
+    <!-- Changes to create Roles table -->
+    <changeSet id="1" author="jkraft">
+        <createTable tableName="permissions">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false" />
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="permissions" columnName="id" startValue="1" incrementBy="1" />
+        <insert tableName="permissions">
+            <column name="name" value="admin" />
+        </insert>
+        <insert tableName="permissions">
+            <column name="name" value="limited" />
+        </insert>
+        <insert tableName="permissions">
+            <column name="name" value="public" />
+        </insert>
+    </changeSet>
+    <!-- Changes to add foreign key on Users table -->
+    <changeSet id="2" author="jkraft">
+        <addColumn tableName="users">
+            <column name="permission_id" type="BIGINT" defaultValue="2">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="users"
+            baseColumnNames="permission_id"
+            referencedTableName="permissions"
+            referencedColumnNames="id"
+            constraintName="fk_users_permissions" />
+    </changeSet>
 </databaseChangeLog>

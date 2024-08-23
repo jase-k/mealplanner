@@ -2,13 +2,13 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 type UserState = {
-  user: { id: number; name: string; role: string } | null;
+  user: { id: number; name: string; permission: string } | null;
   accessToken: string | null;
   refreshToken: string | null;
 };
 
 type UserAction =
-  | { type: 'SET_USER'; payload: { id: number; name: string; role: string } }
+  | { type: 'SET_USER'; payload: { id: number; name: string; permission: string } }
   | { type: 'SET_TOKENS'; payload: { accessToken: string; refreshToken: string } }
   | { type: 'LOGOUT' };
 

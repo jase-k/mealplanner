@@ -22,7 +22,7 @@ export default function Home() {
         });
         dispatch({
           type: 'SET_USER',
-          payload: { id: 20710, name: 'Anonymous', role: 'public' }
+          payload: { id: 20710, name: 'Anonymous', permission: 'public' }
         });
         console.log('Anonymous login successful');
       } catch (error) {
