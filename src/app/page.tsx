@@ -20,6 +20,10 @@ export default function Home() {
           type: 'SET_TOKENS', 
           payload: { accessToken: access_token, refreshToken: refresh_token } 
         });
+        dispatch({
+          type: 'SET_USER',
+          payload: { id: 20710, name: 'Anonymous', role: 'public' }
+        });
         console.log('Anonymous login successful');
       } catch (error) {
         console.error('Anonymous login failed:', error);
@@ -31,8 +35,9 @@ export default function Home() {
       performAnonymousLogin();
     } else {
       console.log('Access token is set:', state.accessToken);
+      console.log('User:', state.user);
     }
-  }, [state.accessToken, dispatch]);
+  }, [state.accessToken, dispatch, state.user]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
