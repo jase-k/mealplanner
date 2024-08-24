@@ -34,7 +34,7 @@ export default function Component() {
         accessToken: auth.access_token,
         refreshToken: auth.refresh_token
       }});
-      console.log(auth, user);
+      console.log(state.accessToken, state.user);
       router.push('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);

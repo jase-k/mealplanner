@@ -66,9 +66,9 @@ async function getUser(access_token: string, roleid: string) {
       Authorization: `Bearer ${access_token}`
     }
   })
-  console.log("User response", response.data);
-  if (response.data.users && response.data.users.length > 0) {
-    return response.data.users[0];
+  console.log(JSON.stringify(response.data.data.users, null, 2));
+  if (response.data.data.users && response.data.data.users.length > 0) {
+    return response.data.data.users[0];
   } else {
     throw new Error('User not found');
   }
